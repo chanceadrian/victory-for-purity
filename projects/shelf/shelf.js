@@ -344,3 +344,130 @@ document.querySelectorAll('.view.share').forEach(shareSection => {
 
     updateButtons(); // initial state
 });
+
+
+// ------------------------------
+// Modal functionality
+// ------------------------------
+
+// Modal functionality
+let modalAnimationFrameId = null;
+let scrollPosition = 0;
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    const body = document.body;
+
+    if (!modal) return;
+
+    // Cancel any pending animation
+    if (modalAnimationFrameId) {
+        cancelAnimationFrame(modalAnimationFrameId);
+    }
+
+    // Store current scroll position
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Prevent body scroll and maintain position
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollPosition}px`;
+    body.style.width = '100%';
+
+    // Show modal immediately but keep it invisible
+    modal.style.display = 'flex';
+
+    // Force a reflow to ensure display change is applied
+    modal.offsetHeight;
+
+    // Use requestAnimationFrame for smooth animation
+    modalAnimationFrameId = requestAnimationFrame(() => {
+        modal.setAttribute('data-modal', 'open');
+        modalAnimationFrameId = null;
+    });
+
+    // Add escape key listener
+    document.addEventListener('keydown', handleModalEscapeKey);
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    const body = document.body;
+
+    if (!modal) return;
+
+    // Cancel any pending animation
+    if (modalAnimationFrameId) {
+        cancelAnimationFrame(modalAnimationFrameId);
+    }
+
+    // Start close animation
+    modal.setAttribute('data-modal', 'closed');
+
+    // Restore body scroll and position
+    body.style.position = '';
+    body.style.top = '';
+    body.style.width = '';
+
+    // Restore scroll position
+    window.scrollTo(0, scrollPosition);
+
+    // Clean up after animation completes
+    setTimeout(() => {
+        if (modal.getAttribute('data-modal') === 'closed') {
+            modal.style.display = 'none';
+
+            // Clear will-change to save resources
+            const container = modal.querySelector('.modal-container');
+            if (container) {
+                container.style.willChange = 'auto';
+            }
+        }
+    }, 500); // Match the CSS transition duration (changed to 500ms)
+
+    // Remove escape key listener
+    document.removeEventListener('keydown', handleModalEscapeKey);
+}
+
+// Handle escape key press
+function handleModalEscapeKey(event) {
+    if (event.key === 'Escape') {
+        const openModal = document.querySelector('.modal-overlay[data-modal="open"]');
+        if (openModal) {
+            closeModal(openModal.id);
+        }
+    }
+}
+
+// Close modal when clicking outside content
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('modal-backdrop')) {
+        const modal = event.target.closest('.modal-overlay');
+        if (modal && modal.getAttribute('data-modal') === 'open') {
+            closeModal(modal.id);
+        }
+    }
+});
+
+// Prevent modal from closing when clicking inside content
+document.addEventListener('click', function (event) {
+    if (event.target.closest('.modal-content')) {
+        event.stopPropagation();
+    }
+});
+
+// Clean up animations on page unload
+window.addEventListener('beforeunload', function () {
+    if (modalAnimationFrameId) {
+        cancelAnimationFrame(modalAnimationFrameId);
+    }
+});
+
+// Initialize modals on page load
+document.addEventListener('DOMContentLoaded', function () {
+    // Ensure all modals start in closed state
+    const modals = document.querySelectorAll('.modal-overlay');
+    modals.forEach(modal => {
+        modal.setAttribute('data-modal', 'closed');
+        modal.style.display = 'none';
+    });
+});

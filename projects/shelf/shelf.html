@@ -148,7 +148,7 @@
                     </defs>
                 </svg>
             </div>
-            <p>Olympus</p>
+            <p>ScenarioKit</p>
         </a>
         <a class="mr">
             <div class="h-svg">
@@ -237,23 +237,29 @@
                 more personal. It’s a remarkably simple display case for photos, notes, links, and more — one built on a
                 profound belief: that the way we organize our lives shapes how we experience them.
             </p>
-            <div class="links">
-                <a>Behind the Design</a>
-                <a>Prototyping Shelf</a>
-            </div>
+            <button class="popover-trigger" onclick="openModal('info-modal')">
+                Behind the Design: Introducing Shelf
+                <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 18.9629C4.77686 18.9629 0.537109 14.7231 0.537109 9.5C0.537109 4.27686 4.77686 0.0371094 10 0.0371094C15.2231 0.0371094 19.4629 4.27686 19.4629 9.5C19.4629 14.7231 15.2231 18.9629 10 18.9629ZM10 17.3857C14.3604 17.3857 17.8857 13.8604 17.8857 9.5C17.8857 5.13965 14.3604 1.61426 10 1.61426C5.63965 1.61426 2.11426 5.13965 2.11426 9.5C2.11426 13.8604 5.63965 17.3857 10 17.3857ZM5.69531 9.5C5.69531 9.03613 6.01074 8.71143 6.48389 8.71143H9.21143V5.98389C9.21143 5.51074 9.52686 5.18604 9.98145 5.18604C10.4453 5.18604 10.77 5.51074 10.77 5.98389V8.71143H13.5068C13.9707 8.71143 14.2954 9.03613 14.2954 9.5C14.2954 9.95459 13.9707 10.2607 13.5068 10.2607H10.77V12.9976C10.77 13.4707 10.4453 13.7861 9.98145 13.7861C9.52686 13.7861 9.21143 13.4614 9.21143 12.9976V10.2607H6.48389C6.01074 10.2607 5.69531 9.95459 5.69531 9.5Z" />
+                </svg>
+            </button>
         </div>
     </section>
 
     <section class="artifacts">
-        <div class="view">
-            <h5>Shelf Artifacts</h5>
-            <h3>Frame something wonderful.</h3>
-        </div>
-        <div class="view copy">
-            <p><span>Storytelling through what we keep.</span> Shelf Artifacts are simple, expressive containers for
-                things worth revisiting. Each one holds a piece of life as it’s happening — a passing thought, a
-                favorite scene, a love note you don’t want to lose. And with Time Capsules, you can lock any item until
-                the moment feels right. Time’s the only password you’ll need.</p>
+        <div class="view head">
+            <div class="view">
+                <h5>Shelf Artifacts</h5>
+                <h3>Frame something wonderful.</h3>
+            </div>
+            <div class="view copy">
+                <p><span>Storytelling through what we keep.</span> Shelf Artifacts are simple, expressive containers for
+                    things worth revisiting. Each one holds a piece of life as it’s happening — a passing thought, a
+                    favorite scene, a love note you don’t want to lose. And with Time Capsules, you can lock any item
+                    until
+                    the moment feels right. Time’s the only password you’ll need.</p>
+            </div>
         </div>
         <div class="view art-gallery">
             <div class="view gallery">
@@ -840,4 +846,46 @@
             </div>
         </div>
     </footer>
+
+    <div id="info-modal" class="modal-overlay" data-modal="closed">
+        <div class="modal-backdrop" onclick="closeModal('info-modal')"></div>
+        <div class="modal-container">
+            <div class="modal-content">
+                <button class="close-button" onclick="closeModal('info-modal')">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.544067 13.4539C0.405721 13.3155 0.314412 13.155 0.270142 12.9724C0.225871 12.7898 0.225871 12.6072 0.270142 12.4246C0.314412 12.2419 0.402954 12.0842 0.535767 11.9514L5.48303 6.99585L0.535767 2.04858C0.402954 1.92131 0.314412 1.76636 0.270142 1.58374C0.231405 1.39559 0.231405 1.21021 0.270142 1.02759C0.314412 0.844971 0.405721 0.684489 0.544067 0.546143C0.67688 0.407796 0.834595 0.316488 1.01721 0.272217C1.20536 0.227946 1.39075 0.227946 1.57336 0.272217C1.76152 0.316488 1.922 0.405029 2.05481 0.537842L7.00208 5.48511L11.9493 0.537842C12.0822 0.405029 12.2399 0.316488 12.4225 0.272217C12.6051 0.227946 12.7877 0.227946 12.9703 0.272217C13.153 0.316488 13.3134 0.410563 13.4518 0.554443C13.5901 0.687256 13.6814 0.844971 13.7257 1.02759C13.7755 1.21021 13.7755 1.39282 13.7257 1.57544C13.6814 1.75806 13.5929 1.91577 13.4601 2.04858L8.52112 6.99585L13.4601 11.9514C13.5929 12.0842 13.6814 12.2419 13.7257 12.4246C13.77 12.6072 13.77 12.7898 13.7257 12.9724C13.6814 13.155 13.5901 13.3155 13.4518 13.4539C13.3134 13.5922 13.153 13.6835 12.9703 13.7278C12.7877 13.7721 12.6051 13.7721 12.4225 13.7278C12.2399 13.6835 12.0822 13.595 11.9493 13.4622L7.00208 8.51489L2.05481 13.4622C1.922 13.595 1.76428 13.6835 1.58167 13.7278C1.39905 13.7721 1.21366 13.7721 1.02551 13.7278C0.842896 13.6835 0.682414 13.5922 0.544067 13.4539Z" />
+                    </svg>
+                </button>
+                <div class="modal-left">
+                    <div class="view copy">
+                        <h5>Introducing Shelf</h5>
+                        <h1>It's utility is purely <br> psychological.</h1>
+                    </div>
+
+                    <div class="hold-p">
+                        <p>People have always needed to see themselves reflected in their environment. There's just a
+                            fundamental human need to curate the spaces around us. To create a visual narrative of
+                            who we are. The photograph, the book, the small object from a far place — they're markers.
+                            Reminders of the people, places, and times that have shaped us.</p>
+
+                        <p>What's remarkable is how this process of selection and arrangement helps us understand
+                            ourselves
+                            more clearly. The act of choosing what to display, where to place it, how it relates to
+                            everything else. This becomes a form of self- reflection, expression, definition.</p>
+
+                        <p> Because so many of
+                            these meaningful objects now exist digitally — our favorite quotes, love notes, the photos
+                            we
+                            revisit again and again — the challenge becomes creating something
+                            that honors this psychological need, that understands these objects don't just occupy space:
+                            they
+                            help
+                            define the very essence of home.</p>
+                    </div>
+                </div>
+                <div class="modal-right"></div>
+            </div>
+        </div>
+    </div>
 </body>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chance - Mobile Website</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #808080;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+        }
+
+        .scroll-container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .page {
+            width: 100vw;
+            min-height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            padding: 20px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .page-1 {
+            background-image: url('/pages/im/about/chance.avif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .page-2 {
+            background-color: #f0f0f0;
+        }
+
+        .page-3 {
+            background-color: #e0e0e0;
+        }
+
+        .page-indicator {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary);
+            opacity: 1;
+        }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .home-button {
+            align-self: flex-start;
+            padding: 11px 18px 11px 21px;
+            border: 1px solid #33768F;
+            border-radius: 25px;
+            background: transparent;
+            color: #33768F;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: rgba(51, 118, 143, 0.1);
+        }
+
+        .home-select-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 32px;
+            z-index: 1000;
+        }
+
+        .home-select {
+            padding: 11px 30px 11px 21px;
+            border: 1px solid #33768F;
+            border-radius: 25px;
+            background: transparent;
+            color: #33768F;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 96px;
+            position: relative;
+        }
+
+        .home-select:hover {
+            background-color: rgba(51, 118, 143, 0.1);
+        }
+
+        .home-select:focus {
+            outline: 2px solid #33768F;
+            outline-offset: 2px;
+        }
+
+        .home-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            width: 9px;
+            height: 13px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+            margin-top: 50px;
+        }
+
+        .name-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .chance-text {
+            font-size: 38px;
+            line-height: 44px;
+            letter-spacing: 0.4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .castaneda-text {
+            font-size: 20px;
+            line-height: 25px;
+            letter-spacing: -0.45px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .description-text {
+            font-size: 17px;
+            line-height: 25px;
+            letter-spacing: -0.45px;
+            font-weight: 500;
+            color: var(--secondary);
+            margin-top: 11px;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .about-button {
+            align-self: flex-end;
+            padding: 11px 21px;
+            border: 1px solid #33768F;
+            border-radius: 25px;
+            background: transparent;
+            color: #33768F;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: auto;
+            margin-top: 28px;
+        }
+
+        .about-button:hover {
+            background-color: rgba(51, 118, 143, 0.1);
+        }
+
+        .location-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Placeholder content for other pages */
+        .page-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="home-select-wrapper">
+        <select class="home-select" id="homeSelect">
+            <option value="" disabled selected>Home</option>
+            <option value="indecision">InDecision</option>
+            <option value="shelf">Shelf</option>
+            <option value="scenariokit">ScenarioKit</option>
+            <option value="mhci">MHCI Redesign</option>
+            <option value="passive">Passive Sensing</option>
+            <option value="about">About</option>
+        </select>
+        <svg class="home-icon" width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M4.5 0.050293C4.61003 0.050293 4.71159 0.0735677 4.80469 0.120117C4.90202 0.162435 4.99512 0.225911 5.08398 0.310547L8.6958 3.77637C8.76351 3.84408 8.81852 3.92236 8.86084 4.01123C8.90739 4.1001 8.93066 4.19954 8.93066 4.30957C8.93066 4.45345 8.89681 4.58252 8.8291 4.69678C8.76139 4.8068 8.67041 4.89355 8.55615 4.95703C8.44613 5.02051 8.32552 5.05225 8.19434 5.05225C8.10547 5.05225 8.01237 5.03743 7.91504 5.00781C7.82194 4.97396 7.73519 4.91683 7.65479 4.83643L4.5 1.75146L1.34521 4.83643C1.26481 4.92106 1.17806 4.97819 1.08496 5.00781C0.991862 5.03743 0.898763 5.05225 0.805664 5.05225C0.670247 5.05225 0.547526 5.02051 0.4375 4.95703C0.327474 4.89355 0.238607 4.8068 0.170898 4.69678C0.10319 4.58252 0.0693359 4.45345 0.0693359 4.30957C0.0693359 4.19954 0.0904948 4.1001 0.132812 4.01123C0.179362 3.92236 0.238607 3.84408 0.310547 3.77637L3.91602 0.310547C4.00488 0.225911 4.09798 0.162435 4.19531 0.120117C4.29264 0.0735677 4.39421 0.050293 4.5 0.050293ZM4.5 12.7837C4.39421 12.7837 4.29264 12.7604 4.19531 12.7139C4.09798 12.6715 4.00488 12.6081 3.91602 12.5234L0.310547 9.05762C0.238607 8.98568 0.179362 8.90527 0.132812 8.81641C0.0904948 8.72754 0.0693359 8.62809 0.0693359 8.51807C0.0693359 8.37419 0.10319 8.24723 0.170898 8.13721C0.238607 8.02718 0.327474 7.94043 0.4375 7.87695C0.547526 7.81348 0.670247 7.78174 0.805664 7.78174C0.898763 7.78174 0.991862 7.79655 1.08496 7.82617C1.17806 7.85579 1.26481 7.91292 1.34521 7.99756L4.5 11.0825L7.65479 7.99756C7.73519 7.91715 7.82194 7.86214 7.91504 7.83252C8.01237 7.79867 8.10547 7.78174 8.19434 7.78174C8.32552 7.78174 8.44613 7.81348 8.55615 7.87695C8.67041 7.94043 8.76139 8.02718 8.8291 8.13721C8.89681 8.24723 8.93066 8.37419 8.93066 8.51807C8.93066 8.62809 8.90739 8.72754 8.86084 8.81641C8.81852 8.90527 8.76351 8.98568 8.6958 9.05762L5.08398 12.5234C4.99512 12.6081 4.90202 12.6715 4.80469 12.7139C4.71159 12.7604 4.61003 12.7837 4.5 12.7837Z"
+                fill="#33768F" fill-opacity="0.6" />
+        </svg>
+    </div>
+
+    <div class="scroll-container" id="scrollContainer">
+        <!-- Page 1 -->
+        <div class="page page-1">
+            <div class="main-content">
+                <div class="name-section">
+                    <div class="chance-text">Chance</div>
+                    <div class="castaneda-text">Castaneda</div>
+                </div>
+
+                <div class="description-text">
+                    Technology can make us more than we are today. Technology can make us more than we are. Technology
+                    can make us.
+                </div>
+            </div>
+
+            <button class="about-button">About Chance</button>
+
+            <div class="footer-section">
+                <div class="location-text">Lobos Point National Park, CA</div>
+            </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page page-2">
+            <div class="page-content">Page 2 Content</div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page page-3">
+            <div class="page-content">Page 3 Content</div>
+        </div>
+    </div>
+
+    <!-- Page Indicator -->
+    <div class="page-indicator">
+        <div class="dot active" data-page="0"></div>
+        <div class="dot" data-page="1"></div>
+        <div class="dot" data-page="2"></div>
+    </div>
+
+    <script>
+        const scrollContainer = document.getElementById('scrollContainer');
+        const dots = document.querySelectorAll('.dot');
+
+        // Update active dot based on scroll position
+        scrollContainer.addEventListener('scroll', () => {
+            const scrollTop = scrollContainer.scrollTop;
+            const pageHeight = window.innerHeight;
+            const currentPage = Math.round(scrollTop / pageHeight);
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPage);
+            });
+        });
+
+        // Click dot to navigate to page
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const pageHeight = window.innerHeight;
+                scrollContainer.scrollTo({
+                    top: index * pageHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add select change handler
+        const homeSelect = document.getElementById('homeSelect');
+
+        homeSelect.addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+
+            // Handle navigation based on the selected item
+            switch (selectedValue) {
+                case 'about':
+                    alert('About page clicked!');
+                    break;
+                default:
+                    // For other items, you can add specific navigation logic
+                    const selectedText = e.target.options[e.target.selectedIndex].text;
+                    alert(`${selectedText} clicked!`);
+                    break;
+            }
+
+            // Reset the select to show "Home" again
+            setTimeout(() => {
+                e.target.selectedIndex = 0;
+            }, 100);
+        });
+
+        document.querySelector('.about-button').addEventListener('click', () => {
+            alert('About Chance clicked!');
+        });
+    </script>
+</body>
+
+</html>

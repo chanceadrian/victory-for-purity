@@ -1,374 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chance - Mobile Website</title>
-    <style>
-        :root {
-            --primary: #000000;
-            --secondary: #808080;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden;
-        }
-
-        .scroll-container {
-            display: flex;
-            flex-direction: column;
-            width: 100vw;
-            height: 100vh;
-            overflow-y: auto;
-            scroll-snap-type: y mandatory;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .page {
-            width: 100vw;
-            min-height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            padding: 40px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .page-1 {
-            background-image: url('/victory-for-purity/pages/im/about/chance.avif');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .page-2 {
-            background-color: #f0f0f0;
-        }
-
-        .page-3 {
-            background-color: #e0e0e0;
-        }
-
-        .page-4 {
-            background-color: #a4b4ab;
-        }
-
-        .page-5 {
-            background-color: rgb(165, 176, 197);
-        }
-
-        .page-indicator {
-            position: fixed;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            z-index: 1000;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: var(--secondary);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: var(--primary);
-            opacity: 1;
-        }
-
-        .header-section {
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-
-        .home-button {
-            align-self: flex-start;
-            padding: 11px 18px 11px 21px;
-            border: 1px solid #33768F;
-            border-radius: 25px;
-            background: transparent;
-            color: #33768F;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .home-button:hover {
-            background-color: rgba(51, 118, 143, 0.1);
-        }
-
-        .home-select-wrapper {
-            position: fixed;
-            top: 20px;
-            left: 32px;
-            z-index: 1000;
-        }
-
-        .home-select {
-            padding: 11px 30px 11px 21px;
-            border: 1px solid #33768F;
-            border-radius: 25px;
-            background: transparent;
-            color: #33768F;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            width: 96px;
-            position: relative;
-        }
-
-        .home-select:hover {
-            background-color: rgba(51, 118, 143, 0.1);
-        }
-
-        .home-select:focus {
-            outline: 2px solid #33768F;
-            outline-offset: 2px;
-        }
-
-        .home-icon {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            width: 9px;
-            height: 13px;
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 11px;
-            margin-top: 50px;
-        }
-
-        .name-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .chance-text {
-            font-size: 38px;
-            line-height: 44px;
-            letter-spacing: 0.4px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .castaneda-text {
-            font-size: 20px;
-            line-height: 25px;
-            letter-spacing: -0.45px;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-
-        .description-text {
-            font-size: 17px;
-            line-height: 25px;
-            letter-spacing: -0.45px;
-            font-weight: 500;
-            color: var(--secondary);
-            margin-top: 11px;
-        }
-
-        .footer-section {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .about-button {
-            align-self: flex-end;
-            padding: 11px 21px;
-            border: 1px solid #33768F;
-            border-radius: 25px;
-            background: transparent;
-            color: #33768F;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: auto;
-            margin-top: 28px;
-        }
-
-        .about-button:hover {
-            background-color: rgba(51, 118, 143, 0.1);
-        }
-
-        .location-text {
-            color: white;
-            font-size: 16px;
-            font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Placeholder content for other pages */
-        .page-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            font-size: 24px;
-            font-weight: 600;
-            color: var(--primary);
-        }
-    </style>
+    <title>Chance</title>
+    <link rel="stylesheet" href="../../root.css">
+    <link rel="stylesheet" href="home.css">
+    <meta name="theme-color" content="var(--bg-primary)">
+    <script src="home.js" defer></script>
+    <!--<script src="shelf.js" defer></script> -->
+    <!-- <link rel="icon" href="im/main/home-icon.webp" type="image/webp"> -->
 </head>
 
 <body>
-    <div class="home-select-wrapper">
-        <select class="home-select" id="homeSelect">
-            <option value="" disabled selected>Home</option>
-            <option value="indecision">InDecision</option>
-            <option value="shelf">Shelf</option>
-            <option value="scenariokit">ScenarioKit</option>
-            <option value="mhci">MHCI Redesign</option>
-            <option value="passive">Passive Sensing</option>
-            <option value="about">About</option>
-        </select>
-        <svg class="home-icon" width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M4.5 0.050293C4.61003 0.050293 4.71159 0.0735677 4.80469 0.120117C4.90202 0.162435 4.99512 0.225911 5.08398 0.310547L8.6958 3.77637C8.76351 3.84408 8.81852 3.92236 8.86084 4.01123C8.90739 4.1001 8.93066 4.19954 8.93066 4.30957C8.93066 4.45345 8.89681 4.58252 8.8291 4.69678C8.76139 4.8068 8.67041 4.89355 8.55615 4.95703C8.44613 5.02051 8.32552 5.05225 8.19434 5.05225C8.10547 5.05225 8.01237 5.03743 7.91504 5.00781C7.82194 4.97396 7.73519 4.91683 7.65479 4.83643L4.5 1.75146L1.34521 4.83643C1.26481 4.92106 1.17806 4.97819 1.08496 5.00781C0.991862 5.03743 0.898763 5.05225 0.805664 5.05225C0.670247 5.05225 0.547526 5.02051 0.4375 4.95703C0.327474 4.89355 0.238607 4.8068 0.170898 4.69678C0.10319 4.58252 0.0693359 4.45345 0.0693359 4.30957C0.0693359 4.19954 0.0904948 4.1001 0.132812 4.01123C0.179362 3.92236 0.238607 3.84408 0.310547 3.77637L3.91602 0.310547C4.00488 0.225911 4.09798 0.162435 4.19531 0.120117C4.29264 0.0735677 4.39421 0.050293 4.5 0.050293ZM4.5 12.7837C4.39421 12.7837 4.29264 12.7604 4.19531 12.7139C4.09798 12.6715 4.00488 12.6081 3.91602 12.5234L0.310547 9.05762C0.238607 8.98568 0.179362 8.90527 0.132812 8.81641C0.0904948 8.72754 0.0693359 8.62809 0.0693359 8.51807C0.0693359 8.37419 0.10319 8.24723 0.170898 8.13721C0.238607 8.02718 0.327474 7.94043 0.4375 7.87695C0.547526 7.81348 0.670247 7.78174 0.805664 7.78174C0.898763 7.78174 0.991862 7.79655 1.08496 7.82617C1.17806 7.85579 1.26481 7.91292 1.34521 7.99756L4.5 11.0825L7.65479 7.99756C7.73519 7.91715 7.82194 7.86214 7.91504 7.83252C8.01237 7.79867 8.10547 7.78174 8.19434 7.78174C8.32552 7.78174 8.44613 7.81348 8.55615 7.87695C8.67041 7.94043 8.76139 8.02718 8.8291 8.13721C8.89681 8.24723 8.93066 8.37419 8.93066 8.51807C8.93066 8.62809 8.90739 8.72754 8.86084 8.81641C8.81852 8.90527 8.76351 8.98568 8.6958 9.05762L5.08398 12.5234C4.99512 12.6081 4.90202 12.6715 4.80469 12.7139C4.71159 12.7604 4.61003 12.7837 4.5 12.7837Z"
-                fill="#33768F" fill-opacity="0.6" />
-        </svg>
-    </div>
-
-    <div class="scroll-container" id="scrollContainer">
-        <!-- Page 1 -->
-        <div class="page page-1">
-            <div class="main-content">
-                <div class="name-section">
-                    <div class="chance-text">Chance</div>
-                    <div class="castaneda-text">Castaneda</div>
-                </div>
-
-                <div class="description-text">
-                    Technology can make us more than we are today. Technology can make us more than we are. Technology
-                    can make us.
+    <section class="wordmark">
+        <nav>
+            <a class="selected" href="index.html">Home</a>
+            <a href="projects/nasa/nasa.html">TARS</a>
+            <a href="projects/shelf/shelf.html">Shelf</a>
+            <a href="projects/in-decision/in-decision.html">InDecision</a>
+            <a href="projects/machine-learning/machine.html">Machine Learning</a>
+            <a href="projects/what-is-design/what-is-design.html">What's Design?</a>
+        </nav>
+        <div class="rings"></div>
+        <div class="view">
+            <div class="copy">
+                <div class="brow">
+                    <h5>Chance Castañeda</h5>
+                    <h3>There’s a joy to making something<br>great for everyone.</h3>
                 </div>
             </div>
+            <a href="#about">About Chance</a>
+        </div>
+    </section>
 
-            <button class="about-button">About Chance</button>
+    <section class="scroll-gallery projects">
+        <h3>Projects</h3>
+        <div class="scroll view">
+            <ul class="hold-items">
+                <a href="projects/nasa/nasa.html">
+                    <div class="card dark nasa">
+                        <h5>TARS</h5>
+                        <h4>A step forward in Earth-independent operations.</h4>
+                        <div class="open">Open</div>
+                    </div>
+                    <p>iPad, Watch, SwiftUI, Swift Charts</p>
+                </a>
+                <a href="/projects/shelf/shelf.html">
+                    <div class="card shelf">
+                        <h5>Shelf</h5>
+                        <h4>Your life. Shelved beautifully.</h4>
+                        <div class="open">Open</div>
+                    </div>
+                    <p>iPhone, iPad, Mac, Apple Vision Pro, Watch, TV</p>
+                </a>
+                <a href="projects/in-decision/in-decision.html">
+                    <div class="card decision">
+                        <h5>InDecision</h5>
+                        <h4>The power to find clarity.</h4>
+                        <div class="open white-open">Open</div>
+                    </div>
+                    <p>LLMs, Web</p>
+                </a>
+                <a href="projects/machine-learning/machine.html">
+                    <div class="card machine">
+                        <h5>Machine Learning</h5>
+                        <h4>Prototyping real-time<br>eating recognition.</h4>
+                        <div class="open">Open</div>
+                    </div>
+                    <p>Watch, iPhone, CoreML, SwiftUI</p>
+                </a>
+                <a href="projects/what-is-design/what-is-design.html">
+                    <div class="card design">
+                        <h5>What's Design?</h5>
+                        <h4>Essential principles for the next 100 years.</h4>
+                        <div class="open">Open</div>
+                    </div>
+                    <p>Design Thinking</p>
+                </a>
+            </ul>
+        </div>
+        <div class="controls">
+            <button class="left">
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0.654297 8C0.654297 8.16602 0.6875 8.32373 0.753906 8.47314C0.814779 8.61702 0.914388 8.75537 1.05273 8.88818L7.43604 15.1387C7.65186 15.349 7.91471 15.4541 8.22461 15.4541C8.42383 15.4541 8.60921 15.4043 8.78076 15.3047C8.95231 15.2051 9.09066 15.0723 9.1958 14.9062C9.29541 14.7402 9.34521 14.5521 9.34521 14.3418C9.34521 14.0374 9.229 13.7663 8.99658 13.5283L3.31055 8L8.99658 2.47168C9.229 2.23926 9.34521 1.9681 9.34521 1.6582C9.34521 1.45345 9.29541 1.26807 9.1958 1.10205C9.09066 0.930501 8.95231 0.794922 8.78076 0.695312C8.60921 0.595703 8.42383 0.545898 8.22461 0.545898C7.91471 0.545898 7.65186 0.651042 7.43604 0.861328L1.05273 7.11182C0.919922 7.24463 0.820312 7.38298 0.753906 7.52686C0.6875 7.67074 0.654297 7.82845 0.654297 8Z" />
+                </svg>
+            </button>
+            <button class="right">
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.34521 8C9.34521 8.16602 9.31201 8.32373 9.24561 8.47314C9.18473 8.61702 9.08512 8.75537 8.94678 8.88818L2.56348 15.1387C2.34766 15.349 2.0848 15.4541 1.7749 15.4541C1.57568 15.4541 1.3903 15.4043 1.21875 15.3047C1.0472 15.2051 0.908854 15.0723 0.803711 14.9062C0.704102 14.7402 0.654297 14.5521 0.654297 14.3418C0.654297 14.0374 0.770508 13.7663 1.00293 13.5283L6.68896 8L1.00293 2.47168C0.770508 2.23926 0.654297 1.9681 0.654297 1.6582C0.654297 1.45345 0.704102 1.26807 0.803711 1.10205C0.908854 0.930501 1.0472 0.794922 1.21875 0.695312C1.3903 0.595703 1.57568 0.545898 1.7749 0.545898C2.0848 0.545898 2.34766 0.651042 2.56348 0.861328L8.94678 7.11182C9.07959 7.24463 9.1792 7.38298 9.24561 7.52686C9.31201 7.67074 9.34521 7.82845 9.34521 8Z" />
+                </svg>
+            </button>
+        </div>
+    </section>
 
-            <div class="footer-section">
-                <div class="location-text">Lobos Point National Park, CA</div>
+    <section class="scroll-gallery influences">
+        <h3>Influences</h3>
+        <div class="scroll view">
+            <ul class="hold-items">
+                <div class="hold-card">
+                    <div class="card dieter"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+                <div class="hold-card">
+                    <div class="card braun"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+                <div class="hold-card">
+                    <div class="card apple-5c"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+                <div class="hold-card">
+                    <div class="card apple"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+                <div class="hold-card">
+                    <div class="card nasa-unity"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+                <div class="hold-card">
+                    <div class="card tufte"></div>
+                    <p><span>As little design as possible. </span>The powerful H2 chip comes to AirPods 4, making audio
+                        and calls sound better than ever. With a range of intelligent features, AirPods 4 adapt to
+                        virtually any listening environment — even when you want complete silence.</p>
+                </div>
+            </ul>
+        </div>
+        <div class="controls">
+            <button class="left">
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M0.654297 8C0.654297 8.16602 0.6875 8.32373 0.753906 8.47314C0.814779 8.61702 0.914388 8.75537 1.05273 8.88818L7.43604 15.1387C7.65186 15.349 7.91471 15.4541 8.22461 15.4541C8.42383 15.4541 8.60921 15.4043 8.78076 15.3047C8.95231 15.2051 9.09066 15.0723 9.1958 14.9062C9.29541 14.7402 9.34521 14.5521 9.34521 14.3418C9.34521 14.0374 9.229 13.7663 8.99658 13.5283L3.31055 8L8.99658 2.47168C9.229 2.23926 9.34521 1.9681 9.34521 1.6582C9.34521 1.45345 9.29541 1.26807 9.1958 1.10205C9.09066 0.930501 8.95231 0.794922 8.78076 0.695312C8.60921 0.595703 8.42383 0.545898 8.22461 0.545898C7.91471 0.545898 7.65186 0.651042 7.43604 0.861328L1.05273 7.11182C0.919922 7.24463 0.820312 7.38298 0.753906 7.52686C0.6875 7.67074 0.654297 7.82845 0.654297 8Z" />
+                </svg>
+            </button>
+            <button class="right">
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.34521 8C9.34521 8.16602 9.31201 8.32373 9.24561 8.47314C9.18473 8.61702 9.08512 8.75537 8.94678 8.88818L2.56348 15.1387C2.34766 15.349 2.0848 15.4541 1.7749 15.4541C1.57568 15.4541 1.3903 15.4043 1.21875 15.3047C1.0472 15.2051 0.908854 15.0723 0.803711 14.9062C0.704102 14.7402 0.654297 14.5521 0.654297 14.3418C0.654297 14.0374 0.770508 13.7663 1.00293 13.5283L6.68896 8L1.00293 2.47168C0.770508 2.23926 0.654297 1.9681 0.654297 1.6582C0.654297 1.45345 0.704102 1.26807 0.803711 1.10205C0.908854 0.930501 1.0472 0.794922 1.21875 0.695312C1.3903 0.595703 1.57568 0.545898 1.7749 0.545898C2.0848 0.545898 2.34766 0.651042 2.56348 0.861328L8.94678 7.11182C9.07959 7.24463 9.1792 7.38298 9.24561 7.52686C9.31201 7.67074 9.34521 7.82845 9.34521 8Z" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="view header">
+            <h3>About Chance</h3>
+            <div class="chance-photos"></div>
+        </div>
+        <div class="view essay">
+            <div class="copy">
+                <h5>Chance Castaneda</h5>
+                <h4><span>Ruthlessly curious. </span>And a deep,<br>
+                    stubborn need to do things well.</h4>
+            </div>
+            <div class="body">
+                <p>What does it mean to be timeless? It means you can look back at something, have the faintest idea
+                    about what it does, but somehow, you know in your heart that it deserves to exist. Braun’s design
+                    team infused a pioneering respect for the personal expression of others, championing restraint in an
+                    era where the eye is assaulted, coerced, and desensitized. Across hundreds of products over decades,
+                    their language remains honest and humane. </p>
+                <p>p2</p>
+                <p>p3</p>
+                <p>p4</p>
+                <p>p5</p>
             </div>
         </div>
-
-        <!-- Page 2 -->
-        <div class="page page-2">
-            <div class="page-content">Page 2 Content</div>
-        </div>
-
-        <!-- Page 3 -->
-        <div class="page page-3">
-            <div class="page-content">Page 3 Content</div>
-        </div>
-
-        <!-- Page 4 -->
-        <div class="page page-3">
-            <div class="page-content">Page 4 Content</div>
-        </div>
-
-        <!-- Page 5 -->
-        <div class="page page-3">
-            <div class="page-content">Page 5 Content</div>
-        </div>
-    </div>
-
-    <!-- Page Indicator -->
-    <div class="page-indicator">
-        <div class="dot active" data-page="0"></div>
-        <div class="dot" data-page="1"></div>
-        <div class="dot" data-page="2"></div>
-        <div class="dot" data-page="3"></div>
-        <div class="dot" data-page="4"></div>
-    </div>
-
-    <script>
-        const scrollContainer = document.getElementById('scrollContainer');
-        const dots = document.querySelectorAll('.dot');
-
-        // Update active dot based on scroll position
-        scrollContainer.addEventListener('scroll', () => {
-            const scrollTop = scrollContainer.scrollTop;
-            const pageHeight = window.innerHeight;
-            const currentPage = Math.round(scrollTop / pageHeight);
-
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentPage);
-            });
-        });
-
-        // Click dot to navigate to page
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                const pageHeight = window.innerHeight;
-                scrollContainer.scrollTo({
-                    top: index * pageHeight,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Add select change handler
-        const homeSelect = document.getElementById('homeSelect');
-
-        homeSelect.addEventListener('change', (e) => {
-            const selectedValue = e.target.value;
-
-            // Handle navigation based on the selected item
-            switch (selectedValue) {
-                case 'about':
-                    alert('About page clicked!');
-                    break;
-                default:
-                    // For other items, you can add specific navigation logic
-                    const selectedText = e.target.options[e.target.selectedIndex].text;
-                    alert(`${selectedText} clicked!`);
-                    break;
-            }
-
-            // Reset the select to show "Home" again
-            setTimeout(() => {
-                e.target.selectedIndex = 0;
-            }, 100);
-        });
-
-        document.querySelector('.about-button').addEventListener('click', () => {
-            alert('About Chance clicked!');
-        });
-    </script>
+    </section>
 </body>
-
-</html>

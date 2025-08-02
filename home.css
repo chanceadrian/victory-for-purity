@@ -1,0 +1,392 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--primary);
+    font-family: SF Pro, -apple-system, BlinkMacSystemFont, 'Inter', "system-ui", sans-serif;
+
+    h3 {
+        font-size: 40px;
+        line-height: 44px;
+        font-weight: 400;
+    }
+
+    h4 {
+        font-size: 36px;
+        line-height: 40px;
+        font-weight: 500;
+    }
+
+    h5 {
+        font-size: 21px;
+        line-height: 29px;
+        font-weight: 600;
+    }
+
+    .brow {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.wordmark {
+    min-height: 680px;
+    overflow: hidden;
+
+    .view {
+        height: 100%;
+        gap: 36px;
+        align-items: center;
+        justify-content: center;
+        height: 615px;
+
+        .copy {
+            gap: 40px;
+            max-width: 600px;
+            text-align: center;
+
+            .brow {
+                gap: 16px;
+            }
+
+            p {
+                font-size: 21px;
+                line-height: 29px;
+            }
+        }
+
+        a {
+            cursor: pointer;
+            font-size: 17;
+            line-height: 26px;
+            font-weight: 500;
+            padding: 8px 21px;
+            border-radius: 100px;
+            border: 1.5px solid var(--primary);
+            transition: all 0.2s;
+            color: inherit;
+        }
+
+        a:hover {
+            background-color: var(--primary);
+            color: var(--d-primary);
+        }
+    }
+
+    .rings {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9) rotate(45deg);
+        aspect-ratio: 1 / 1;
+        height: 2000px;
+        background-image: url(img/rings.avif);
+        z-index: -1;
+        opacity: 0;
+        filter: blur(8px);
+        animation: ringsIn 4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    }
+}
+
+@keyframes ringsIn {
+    to {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+.scroll-gallery {
+    --viewport-responsive: 87.5vw;
+    --scroll-padding: calc(50vw - min(1680px, var(--viewport-responsive))/2);
+    --card-width: 405px;
+    --card-height: 740px;
+
+    gap: 40px;
+    width: 100vw;
+    background-color: var(--bg-secondary);
+    align-items: flex-start;
+
+    h3 {
+        padding-inline: calc(var(--scroll-padding) + 4px);
+        font-weight: 500;
+    }
+
+    .scroll {
+        width: 100vw;
+        overflow: scroll;
+        will-change: transform;
+        scroll-snap-type: x mandatory;
+        scroll-padding: var(--scroll-padding);
+        scrollbar-width: none;
+        padding: 20px 0;
+        margin: -20px 0;
+
+        .hold-items {
+            display: inline-grid;
+            gap: 20px;
+            grid-template-rows: auto;
+            grid-auto-flow: column;
+            width: fit-content;
+            padding-inline: var(--scroll-padding) 40px;
+
+            a,
+            .hold-card {
+                scroll-snap-align: start;
+                transform-origin: center;
+                transition: transform 0.3s ease-in-out;
+
+                .card {
+                    display: flex;
+                    flex-direction: column;
+                    width: var(--card-width);
+                    height: var(--card-height);
+                    border-radius: 28px;
+                    scroll-snap-align: start;
+                }
+
+                .dark {
+                    background-color: var(--d-bg-primary);
+                    color: var(--d-primary);
+
+                    a {
+                        color: inherit;
+                    }
+
+                    .open {
+                        background-color: rgb(120, 120, 128, 0.36);
+                    }
+                }
+
+            }
+
+            a:hover {
+                transform: scale(1.012);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .controls {
+        display: flex;
+        padding-inline: calc(var(--scroll-padding) + 4px);
+        gap: 18px;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 8px;
+
+        button {
+            aspect-ratio: 1/1;
+            width: 36px;
+            background-color: var(--platter);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+
+            svg {
+                fill: var(--secondary);
+            }
+        }
+
+        button:active {
+            transition: opacity 0.05s ease-in-out;
+            opacity: 0.5;
+        }
+
+        .left {
+            padding-left: 3px;
+        }
+
+        .right {
+            padding-right: 3px;
+        }
+
+        .disabled {
+            opacity: 0.5;
+        }
+    }
+}
+
+.projects {
+    padding-block: 120px;
+
+    p {
+        font-size: 14px;
+        line-height: 20px;
+        padding: 17px 13px;
+        color: var(--secondary);
+    }
+
+    .card {
+        gap: 4px;
+        background-color: var(--bg-primary);
+        padding: 30px;
+        text-align: left;
+
+        h5 {
+            font-size: 19px;
+            line-height: 27px;
+        }
+
+        h4 {
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 500;
+            letter-spacing: -.008em;
+        }
+
+        .open {
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 500;
+            width: fit-content;
+            margin-top: 12px;
+            padding: 6px 12px;
+            border-radius: 100px;
+            background-color: rgb(120, 120, 128, 0.1);
+        }
+
+        .white-open {
+            background-color: var(--d-primary);
+        }
+    }
+
+    .nasa {
+        background-image: url(img/nasa-large.avif);
+    }
+
+    .shelf {
+        background-image: url(img/shelf-large.avif);
+    }
+
+    .decision {
+        background-image: url(img/decision-large.avif);
+        background-color: #CFE0DE;
+    }
+
+    .design {
+        background-image: url(img/design-large.avif);
+    }
+
+    .machine {
+        background-image: url(img/machine-large.avif);
+    }
+}
+
+.influences {
+    --card-width: 372px;
+    --card-height: 580px;
+    padding-top: 40px;
+    padding-bottom: 163px;
+
+    .hold-card {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: var(--card-width);
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            border-radius: 28px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 22px;
+            font-weight: 600;
+            /* letter-spacing: -0.022em; */
+            padding-inline: 10px 50px;
+            color: var(--secondary);
+
+            span {
+                color: var(--primary);
+                font-weight: 600;
+            }
+        }
+    }
+
+    .dieter {
+        background-image: url(img/dieter-large.avif);
+    }
+
+    .braun {
+        background-image: url(img/braun-large.avif);
+    }
+
+    .apple-5c {
+        background-image: url(img/5c-large.avif);
+    }
+
+    .tufte {
+        background-image: url(img/tufte-large.avif);
+    }
+
+    .nasa-unity {
+        background-image: url(img/nasa-unity-large.avif);
+    }
+
+    .apple {
+        background-image: url(img/apple-large.avif);
+    }
+}
+
+.about {
+    padding-block: 163px;
+    gap: 163px;
+
+    .header {
+        gap: 64px;
+        text-align: center;
+        align-items: center;
+
+        h3 {
+            font-weight: 500;
+        }
+
+        .chance-photos {
+            aspect-ratio: 5184/1338;
+            width: 1872px;
+            height: 446px;
+            background-image: url(img/chance-photos.avif);
+        }
+    }
+
+    .essay {
+        gap: 44px;
+        max-width: 852px;
+        text-align: left;
+
+        .copy {
+            gap: 20px;
+
+            h5 {
+                font-size: 19px;
+                line-height: 27px;
+            }
+
+            h4 {
+                color: var(--secondary);
+                font-weight: 400;
+
+                span {
+                    color: var(--primary);
+                }
+            }
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+
+            p {
+                font-size: 21px;
+                line-height: 29px;
+                letter-spacing: 0.011em;
+            }
+        }
+    }
+}

@@ -54,6 +54,10 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        ul {
+            margin: 0;
+        }
+
         li {
             list-style: none;
         }
@@ -104,121 +108,39 @@ footer {
 }
 
 nav {
+    font-family: SF Pro, -apple-system, BlinkMacSystemFont, 'Inter', "system-ui", sans-serif;
     color: var(--primary);
-    fill: var(--primary);
     display: flex;
-    justify-content: center;
-    gap: 44px;
-    padding-block: 16px 22px;
-    width: 100vw;
-    text-align: center;
+    justify-content: space-between;
+    width: 980px;
 
     a {
-        height: 91px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding-top: 14px;
-        justify-content: flex-start;
+        padding-inline: 8px;
+        font-size: 15px;
+        line-height: 65px;
         transition: all 0.2s;
-
-        .h-svg {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            max-height: 36px;
-            min-height: 36px;
-        }
-
-        p {
-            font-size: 14px;
-            line-height: 16px;
-            color: var(--primary);
-            font-weight: 400;
-        }
-
-        .h-p {
-            display: grid;
-            gap: 2px;
-
-            p:nth-of-type(2) {
-                font-size: 12px;
-                line-height: 14px;
-                color: var(--hover);
-                font-weight: 600;
-            }
-        }
-    }
-
-    a.hm {
-        width: 67px;
-    }
-
-    a.id {
-        width: 83px;
-    }
-
-    a.sh {
-        width: 62px;
-    }
-
-    a.ns {
-        width: 69px;
-    }
-
-    a.mr {
-        width: 76px;
-    }
-
-    a.ps {
-        width: 72px;
-    }
-
-    a.ab {
-        width: 64px;
+        color: inherit;
     }
 
     a.selected {
-        fill: var(--secondary);
-
-        p {
-            color: var(--secondary);
-        }
+        color: var(--secondary);
     }
 
     a:hover {
-        color: var(--secondary);
-        fill: var(--secondary);
+        color: var(--hover);
         cursor: pointer;
-
-        p {
-            color: var(--secondary);
-        }
-
-        p:nth-of-type(2) {
-            opacity: 0.65;
-        }
     }
 }
 
 nav.dark {
     color: var(--d-primary);
-    fill: var(--d-primary);
-
-    p:nth-of-type(2) {
-        font-size: 12px;
-        line-height: 14px;
-        color: var(--d-hover);
-    }
 
     a.selected {
         color: var(--d-secondary);
-        fill: var(--d-secondary);
     }
 
     a:hover {
-        color: var(--d-secondary);
-        fill: var(--d-secondary);
+        color: var(--d-hover);
     }
 }
 

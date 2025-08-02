@@ -1,0 +1,39 @@
+body {
+    background-color: var(--bg-secondary);
+}
+
+.intro {
+    padding-block: 107px 164px;
+    gap: 64px;
+    text-align: center;
+
+    img {
+        max-width: 545px;
+        margin-left: 44px;
+        transform: translateY(20px) scale(0.99);
+        min-height: 740px;
+    }
+
+    p {
+        font-size: 24px;
+        line-height: 32px;
+        max-width: 652px;
+        font-weight: 600;
+        color: var(--secondary);
+        transform: translateY(16px);
+
+        span {
+            color: var(--primary);
+        }
+    }
+
+    .slide-in {
+        animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateY(0) scale(1);
+    }
+}

@@ -1,0 +1,118 @@
+body {
+    font-family: SF Pro Rounded, SF Pro, -apple-system, BlinkMacSystemFont, 'Inter', "system-ui", sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--primary);
+
+    h1 {
+        font-size: 88px;
+        line-height: 92px;
+        font-weight: 500;
+    }
+
+    h2 {
+        font-size: 64px;
+        line-height: 68px;
+        font-weight: 500;
+        letter-spacing: 0.009em;
+    }
+
+    h3 {
+        font-size: 48px;
+        line-height: 52px;
+        font-weight: 500;
+    }
+
+    h4 {
+        font-size: 32px;
+        line-height: 36px;
+        font-weight: 600;
+    }
+
+    h5 {
+        font-size: 19px;
+        line-height: 27px;
+        font-weight: 600;
+    }
+
+    .copy {
+        span {
+            color: var(--primary);
+        }
+
+        p {
+            font-size: 19px;
+            line-height: 27px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        p:nth-of-type(2) {
+            font-size: 17px;
+            line-height: 22px;
+            font-weight: 400;
+            letter-spacing: -0.017em;
+        }
+    }
+}
+
+.intro {
+    padding-block: 106px 163px;
+    text-align: center;
+
+    .header {
+        position: relative;
+        gap: 80px;
+        align-items: center;
+
+        h1 {
+            background-image: linear-gradient(45deg, var(--primary), #018DA5 25%, #105676 45%, #018DA5 65%, #014F59 75%, var(--primary));
+            background-size: 225% 100%;
+            background-color: var(--primary);
+            background-position: 225% 0%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+
+            transform: translateY(20px) scale(1.1);
+            animation:
+                h1-gradient 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+                h1-reposition 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.2s;
+        }
+
+        .key {
+            aspect-ratio: 1348/600;
+            min-width: 1348px;
+            background-image: url(img/key.avif);
+
+            opacity: 0;
+            transform: scale(0.96) translateY(10px);
+            animation: key-enter 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.2s;
+        }
+    }
+}
+
+@keyframes h1-gradient {
+    0% {
+        background-position-x: 225%;
+    }
+
+    100% {
+        background-position-x: 50%;
+    }
+}
+
+@keyframes h1-reposition {
+    to {
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes key-enter {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

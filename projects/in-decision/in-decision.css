@@ -199,10 +199,15 @@ body {
             }
         }
 
-        .ipad {
+        .cab-tabs {
+            align-items: center;
+            gap: 40px;
+        }
+
+        .item {
             aspect-ratio: 1180/905;
             width: 1180px;
-            background-image: url(img/why.avif);
+            background-image: url(img/if.avif);
         }
     }
 }
@@ -241,7 +246,6 @@ body {
                     transition: opacity 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                     pointer-events: none;
                     position: absolute;
-                    min-height: 108px;
                 }
 
                 p.reveal {
@@ -284,5 +288,241 @@ body {
                 }
             }
         }
+    }
+}
+
+.mac {
+    background: var(--bg-gradient);
+    padding-block: 184px 195px;
+
+    .header {
+        gap: 64px;
+        align-items: center;
+
+        .copy {
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        p {
+            max-width: 582px;
+        }
+    }
+
+    .cab-tabs {
+        gap: 40px;
+        align-items: center;
+
+        .item {
+            aspect-ratio: 6510/4291;
+            width: 1280px;
+            background-image: url(img/sh-options.avif);
+        }
+    }
+
+    .copy {
+        align-items: center;
+    }
+
+
+}
+
+.scroll-gallery {
+    --card-width: 405px;
+    --card-height: 740px;
+
+    gap: 40px;
+    width: 100vw;
+    background-color: var(--bg-secondary);
+    align-items: flex-start;
+
+    h3 {
+        padding-inline: calc(var(--scroll-padding) + 4px);
+        font-weight: 500;
+    }
+
+    .scroll {
+        width: 100vw;
+        overflow: scroll;
+        will-change: transform;
+        scroll-snap-type: x mandatory;
+        scroll-padding: var(--scroll-padding);
+        scrollbar-width: none;
+        padding: 20px 0;
+        margin: -20px 0;
+
+        .hold-items {
+            display: inline-grid;
+            gap: 20px;
+            grid-template-rows: auto;
+            grid-auto-flow: column;
+            width: fit-content;
+            padding-inline: var(--scroll-padding) 40px;
+
+            a,
+            .hold-card {
+                scroll-snap-align: start;
+                transform-origin: center;
+                transition: transform 0.3s ease-in-out;
+
+                .card {
+                    display: flex;
+                    flex-direction: column;
+                    width: var(--card-width);
+                    height: var(--card-height);
+                    border-radius: 28px;
+                    scroll-snap-align: start;
+                }
+
+                .dark {
+                    background-color: var(--d-bg-primary);
+                    color: var(--d-primary);
+
+                    a {
+                        color: inherit;
+                    }
+
+                    .open {
+                        background-color: rgb(120, 120, 128, 0.36);
+                    }
+                }
+
+            }
+
+            a:hover {
+                transform: scale(1.012);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .controls {
+        display: flex;
+        padding-inline: calc(var(--scroll-padding) + 4px);
+        gap: 18px;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: 8px;
+
+        button {
+            aspect-ratio: 1/1;
+            width: 36px;
+            background-color: var(--platter);
+            border-radius: 100px;
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+
+            svg {
+                fill: var(--secondary);
+            }
+        }
+
+        button:active {
+            transition: opacity 0.05s ease-in-out;
+            opacity: 0.5;
+        }
+
+        .left {
+            padding-left: 3px;
+        }
+
+        .right {
+            padding-right: 3px;
+        }
+
+        .disabled {
+            opacity: 0.5;
+        }
+    }
+}
+
+.text-cards {
+    --viewport-responsive: 87.5vw;
+    --scroll-padding: calc(50vw - min(1680px, var(--viewport-responsive))/2);
+    --card-width: 372px;
+    --card-height: 580px;
+
+    background-color: var(--bg-primary);
+    padding-block: 184px 195px;
+
+    .header {
+        padding-inline: calc(var(--scroll-padding) + 4px);
+        gap: 41px;
+
+        .copy {
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        a {
+            cursor: pointer;
+            font-size: 17;
+            line-height: 26px;
+            font-weight: 500;
+            padding: 8px 21px;
+            border-radius: 100px;
+            border: 1.5px solid var(--primary);
+            transition: all 0.2s;
+            color: inherit;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        a:hover {
+            border: 1.5px solid var(--hover);
+            color: var(--hover);
+        }
+    }
+
+    .hold-card {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: var(--card-width);
+
+        .card {
+            width: var(--card-width);
+            height: var(--card-height);
+            border-radius: 28px;
+            background-color: var(--bg-secondary);
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 22px;
+            font-weight: 600;
+            /* letter-spacing: -0.022em; */
+            padding-inline: 10px 50px;
+            color: var(--secondary);
+
+            span {
+                color: var(--primary);
+                font-weight: 600;
+            }
+        }
+    }
+
+    .dieter {
+        background-image: url(img/dieter-large.avif);
+    }
+
+    .braun {
+        background-image: url(img/braun-large.avif);
+    }
+
+    .apple-5c {
+        background-image: url(img/5c-large.avif);
+    }
+
+    .tufte {
+        background-image: url(img/tufte-large.avif);
+    }
+
+    .nasa-unity {
+        background-image: url(img/nasa-unity-large.avif);
+    }
+
+    .apple {
+        background-image: url(img/apple-large.avif);
     }
 }

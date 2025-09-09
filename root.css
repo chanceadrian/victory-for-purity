@@ -70,6 +70,7 @@
     --secondary: rgb(49, 52, 56, 0.7);
     --bg-primary: #FFF;
     --bg-secondary: #F2F4F7;
+    --bg-gradient: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 
     --platter: rgb(102, 114, 128, 0.12);
     --hover: #06c;
@@ -208,4 +209,5 @@ nav.dark {
     position: absolute;
     width: 1px;
     height: 1px;
+    opacity: 0;
 }

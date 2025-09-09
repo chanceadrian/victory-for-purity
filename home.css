@@ -276,7 +276,7 @@ body {
     }
 }
 
-.influences {
+.text-cards {
     --card-width: 372px;
     --card-height: 580px;
     padding-top: 40px;
@@ -292,6 +292,7 @@ body {
             width: var(--card-width);
             height: var(--card-height);
             border-radius: 28px;
+            background-color: var(--bg-primary);
         }
 
         p {
